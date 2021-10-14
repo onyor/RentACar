@@ -1,4 +1,5 @@
 ﻿using Buisness.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entity.Concrete;
@@ -17,39 +18,46 @@ namespace Buisness.Concrete
         {
             _carDal = carDal;
         }
-        public void Add(Car car)
-        {
-            _carDal.Add(car);
-        }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Car> GetAll()
-        {
-            return new List<Car>(_carDal.GetAll());
-        }
 
         public List<Car> GetAllByCategoryId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Car> GetBrands(int brandIid)
+        public IDataResult<Car> GetByCar(int carId)
+        {
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
+        }
+
+
+        IResult ICarService.Add(Car car)
+        {
+            _carDal.Add(car);
+            return new SuccessResult();
+        }
+
+        IResult ICarService.Delete(int id)
+        {
+            return new SuccessResult();
+
+        }
+
+        IDataResult<List<Car>> ICarService.GetAll()
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+
+        }
+
+        IDataResult<List<Car>> ICarService.GetAllByCategoryId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Car GetById(int carId)
+        IResult ICarService.Update(Car car)
         {
-            return _carDal.Get(c => c.CarId == carId);
-        }
-
-        public void Update(Car car)
-        {
-            throw new NotImplementedException();
+            _carDal.Update(car);
+            return new SuccessResult();
         }
     }
 }

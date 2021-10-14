@@ -14,10 +14,10 @@ namespace DataAccess.Concrete
         {
             optionsBuilder.UseSqlServer("Server=localhost;Database=rentACar;Uid=root;Pwd=1234");
         }
-        public DbSet<Car> cars { get; set; }
-        public DbSet<Customer> customers { get; set; }
-        public DbSet<Earning> earnings { get; set; }
-        public DbSet<Location> locations { get; set; }
-        public DbSet<Rent> rents { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Earning> Earnings { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Rent> Rents { get; set; }
     }
 }
