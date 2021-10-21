@@ -12,11 +12,8 @@ namespace Entity.Concrete
     {
         public string PlateNo { get; set; }
         public string Color { get; set; }
-        [ForeignKey("Brand")]
+        //[ForeignKey("Brand")]
         public string BrandId { get; set; }
-
-        [ForeignKey("Location")]
-        public int LocationId { get; set; }
         public Location Location { get; set; }
         public virtual List<Brand> Brands { get; set; }
         public ICollection<RentCar> RentCars { get; set; }

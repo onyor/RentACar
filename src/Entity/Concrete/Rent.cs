@@ -12,7 +12,7 @@ namespace Entity.Concrete
         public int PlateNo { get; set; }
         public DateTime DeliveryDay { get; set; }
 
-        [ForeignKey("Customer")]
+        //[ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public List<Customer> Customers { get; set; }
         public DateTime RentBeginDate { get; set; }

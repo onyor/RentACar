@@ -10,6 +10,7 @@ namespace Entity.Concrete
     {
         public string Phone { get; set; }
         public string Address { get; set; }
+        public int CarId { get; set; }
         public Car Car { get; set; }
     }
 }

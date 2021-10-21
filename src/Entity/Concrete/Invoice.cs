@@ -13,7 +13,7 @@ namespace Entity.Concrete
         public DateTime Date { get; set; }
         public string PlateNo { get; set; }
 
-        [ForeignKey("Car")]
+        //[ForeignKey("Car")]
         public int CarId { get; set; }
 
         public virtual List<Car> Car { get; set; }
