@@ -9,15 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
-    public class CustomerConfiguration : IEntityTypeConfiguration<Car>
+    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Car> builder)
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable("Carasdasd");
+            builder.ToTable("Customer");
             builder.HasKey(x => x.Id);
-
-            //builder.Property(x => x.Brand).IsRequired();
-            //builder.Property(x => x.Color).IsRequired();
         }
     }
 }

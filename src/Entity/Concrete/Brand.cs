@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.Concrete
 {
-    public class Location : BaseEntity
+    public class Brand : BaseEntity
     {
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public Car Car { get; set; }
+        public string Name { get; set; }
     }
 }

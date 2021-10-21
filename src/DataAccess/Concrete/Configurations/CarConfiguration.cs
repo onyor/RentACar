@@ -13,11 +13,10 @@ namespace DataAccess.Concrete.Configurations
     {
         public void Configure(EntityTypeBuilder<Car> builder)
         {
-            builder.ToTable("Carasdasd");
+            builder.ToTable("Car");
             builder.HasKey(x => x.Id);
 
-            //builder.Property(x => x.Brand).IsRequired();
-            //builder.Property(x => x.Color).IsRequired();
+      
         }
     }
 }

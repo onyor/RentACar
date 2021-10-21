@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
-    public class RentConfiguration : IEntityTypeConfiguration<Rent>
+    public class BrandConfiguration : IEntityTypeConfiguration<Brand>
     {
-        public void Configure(EntityTypeBuilder<Rent> builder)
+        public void Configure(EntityTypeBuilder<Brand> builder)
         {
-            builder.ToTable("Rent");
-            builder.HasKey(x => x.Id);
+            builder.ToTable("Brand");
         }
     }
 }

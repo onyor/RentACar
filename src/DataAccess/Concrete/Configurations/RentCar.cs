@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
-    public class RentConfiguration : IEntityTypeConfiguration<Rent>
+    public class RentCarConfiguration : IEntityTypeConfiguration<RentCar>
     {
-        public void Configure(EntityTypeBuilder<Rent> builder)
+        public void Configure(EntityTypeBuilder<RentCar> builder)
         {
-            builder.ToTable("Rent");
-            builder.HasKey(x => x.Id);
+            builder.ToTable("RentCar");
+            builder.HasIndex(x => new { x.RentId, x.CarId }).IsUnique();
         }
     }
 }

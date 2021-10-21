@@ -27,7 +27,7 @@ namespace Buisness.Concrete
 
         public IDataResult<Car> GetByCar(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId));
         }
 
 

@@ -9,15 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
-    public class LocationConfiguration : IEntityTypeConfiguration<Car>
+    public class LocationConfiguration : IEntityTypeConfiguration<Location>
     {
-        public void Configure(EntityTypeBuilder<Car> builder)
+        public void Configure(EntityTypeBuilder<Location> builder)
         {
-            builder.ToTable("Carasdasd");
+            builder.ToTable("Location");
             builder.HasKey(x => x.Id);
-
-            //builder.Property(x => x.Brand).IsRequired();
-            //builder.Property(x => x.Color).IsRequired();
         }
     }
 }
