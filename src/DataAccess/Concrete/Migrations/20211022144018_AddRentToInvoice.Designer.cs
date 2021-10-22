@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Concrete.Migrations
 {
     [DbContext(typeof(RentACarContext))]
-    [Migration("20211021192845_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20211022144018_AddRentToInvoice")]
+    partial class AddRentToInvoice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,6 @@ namespace DataAccess.Concrete.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CarId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -54,8 +51,6 @@ namespace DataAccess.Concrete.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
-
                     b.ToTable("Brand");
                 });
 
@@ -69,6 +64,9 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<string>("BrandId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("BrandId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -78,14 +76,14 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("InvoiceId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("LocationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PlateNo")
                         .HasColumnType("nvarchar(max)");
@@ -98,7 +96,9 @@ namespace DataAccess.Concrete.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceId");
+                    b.HasIndex("BrandId1");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Car");
                 });
@@ -131,9 +131,6 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
@@ -145,8 +142,6 @@ namespace DataAccess.Concrete.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RentId");
-
                     b.ToTable("Customer");
                 });
 
@@ -156,9 +151,6 @@ namespace DataAccess.Concrete.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -178,6 +170,9 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<string>("PlateNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RentId")
+                        .HasColumnType("int");
+
                     b.Property<float>("RentMoney")
                         .HasColumnType("real");
 
@@ -188,6 +183,9 @@ namespace DataAccess.Concrete.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RentId")
+                        .IsUnique();
 
                     b.ToTable("Invoice");
                 });
@@ -227,9 +225,6 @@ namespace DataAccess.Concrete.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CarId")
-                        .IsUnique();
 
                     b.ToTable("Location");
                 });
@@ -273,6 +268,8 @@ namespace DataAccess.Concrete.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Rent");
                 });
 
@@ -294,36 +291,37 @@ namespace DataAccess.Concrete.Migrations
                     b.ToTable("RentCar");
                 });
 
-            modelBuilder.Entity("Entity.Concrete.Brand", b =>
-                {
-                    b.HasOne("Entity.Concrete.Car", null)
-                        .WithMany("Brands")
-                        .HasForeignKey("CarId");
-                });
-
             modelBuilder.Entity("Entity.Concrete.Car", b =>
                 {
-                    b.HasOne("Entity.Concrete.Invoice", null)
-                        .WithMany("Car")
-                        .HasForeignKey("InvoiceId");
+                    b.HasOne("Entity.Concrete.Brand", "Brand")
+                        .WithMany("Cars")
+                        .HasForeignKey("BrandId1");
+
+                    b.HasOne("Entity.Concrete.Location", null)
+                        .WithMany("Cars")
+                        .HasForeignKey("LocationId");
+
+                    b.Navigation("Brand");
                 });
 
-            modelBuilder.Entity("Entity.Concrete.Customer", b =>
+            modelBuilder.Entity("Entity.Concrete.Invoice", b =>
                 {
-                    b.HasOne("Entity.Concrete.Rent", null)
-                        .WithMany("Customers")
-                        .HasForeignKey("RentId");
-                });
-
-            modelBuilder.Entity("Entity.Concrete.Location", b =>
-                {
-                    b.HasOne("Entity.Concrete.Car", "Car")
-                        .WithOne("Location")
-                        .HasForeignKey("Entity.Concrete.Location", "CarId")
+                    b.HasOne("Entity.Concrete.Rent", "Rent")
+                        .WithOne("Invoice")
+                        .HasForeignKey("Entity.Concrete.Invoice", "RentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.Navigation("Rent");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Rent", b =>
+                {
+                    b.HasOne("Entity.Concrete.Customer", null)
+                        .WithMany("Rents")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entity.Concrete.RentCar", b =>
@@ -345,23 +343,29 @@ namespace DataAccess.Concrete.Migrations
                     b.Navigation("Rent");
                 });
 
+            modelBuilder.Entity("Entity.Concrete.Brand", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
             modelBuilder.Entity("Entity.Concrete.Car", b =>
                 {
-                    b.Navigation("Brands");
-
-                    b.Navigation("Location");
-
                     b.Navigation("RentCars");
                 });
 
-            modelBuilder.Entity("Entity.Concrete.Invoice", b =>
+            modelBuilder.Entity("Entity.Concrete.Customer", b =>
                 {
-                    b.Navigation("Car");
+                    b.Navigation("Rents");
+                });
+
+            modelBuilder.Entity("Entity.Concrete.Location", b =>
+                {
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Rent", b =>
                 {
-                    b.Navigation("Customers");
+                    b.Navigation("Invoice");
 
                     b.Navigation("RentCars");
                 });

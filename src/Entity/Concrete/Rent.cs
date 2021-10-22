@@ -11,11 +11,9 @@ namespace Entity.Concrete
     {
         public int PlateNo { get; set; }
         public DateTime DeliveryDay { get; set; }
-
-        //[ForeignKey("Customer")]
         public int CustomerId { get; set; }
-        public List<Customer> Customers { get; set; }
         public DateTime RentBeginDate { get; set; }
-        public ICollection<RentCar> RentCars { get; set; }
+        public Invoice Invoice { get; set; }
+        public List<RentCar> RentCars { get; set; }
     }
 }

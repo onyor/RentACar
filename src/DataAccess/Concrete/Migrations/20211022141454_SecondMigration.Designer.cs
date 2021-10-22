@@ -4,14 +4,16 @@ using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Concrete.Migrations
 {
     [DbContext(typeof(RentACarContext))]
-    partial class RentACarContextModelSnapshot : ModelSnapshot
+    [Migration("20211022141454_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,6 +152,9 @@ namespace DataAccess.Concrete.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -168,9 +173,6 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<string>("PlateNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RentId")
-                        .HasColumnType("int");
-
                     b.Property<float>("RentMoney")
                         .HasColumnType("real");
 
@@ -182,8 +184,7 @@ namespace DataAccess.Concrete.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RentId")
-                        .IsUnique();
+                    b.HasIndex("CarId");
 
                     b.ToTable("Invoice");
                 });
@@ -304,13 +305,11 @@ namespace DataAccess.Concrete.Migrations
 
             modelBuilder.Entity("Entity.Concrete.Invoice", b =>
                 {
-                    b.HasOne("Entity.Concrete.Rent", "Rent")
-                        .WithOne("Invoice")
-                        .HasForeignKey("Entity.Concrete.Invoice", "RentId")
+                    b.HasOne("Entity.Concrete.Car", null)
+                        .WithMany("Invoices")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Rent");
                 });
 
             modelBuilder.Entity("Entity.Concrete.Rent", b =>
@@ -348,6 +347,8 @@ namespace DataAccess.Concrete.Migrations
 
             modelBuilder.Entity("Entity.Concrete.Car", b =>
                 {
+                    b.Navigation("Invoices");
+
                     b.Navigation("RentCars");
                 });
 
@@ -363,8 +364,6 @@ namespace DataAccess.Concrete.Migrations
 
             modelBuilder.Entity("Entity.Concrete.Rent", b =>
                 {
-                    b.Navigation("Invoice");
-
                     b.Navigation("RentCars");
                 });
 #pragma warning restore 612, 618

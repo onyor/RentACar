@@ -12,10 +12,7 @@ namespace Entity.Concrete
         public float RentMoney { get; set; }
         public DateTime Date { get; set; }
         public string PlateNo { get; set; }
-
-        //[ForeignKey("Car")]
-        public int CarId { get; set; }
-
-        public virtual List<Car> Car { get; set; }
+        public int RentId { get; set; }
+        public Rent Rent { get; set; }
     }
 }
