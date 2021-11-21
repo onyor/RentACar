@@ -19,7 +19,7 @@ namespace Entity.Concrete
         public DateTime CreatedAt { get; set; }
 
         [Column(Order = 95)]
-        public Guid CreatedBy { get; set; }
+        public Guid? CreatedBy { get; set; }
 
         [Column(Order = 96)]
         public DateTime? UpdatedAt { get; set; }
