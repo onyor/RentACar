@@ -15,6 +15,14 @@ namespace DataAccess.Concrete.Configurations
         {
             builder.ToTable("RentCar");
             builder.HasIndex(x => new { x.RentId, x.CarId }).IsUnique();
+
+            var dateTime = new DateTime(2021, 1, 1);
+
+            builder.HasData(new RentCar
+            {
+                CarId = 1,
+                RentId = 1
+            });
         }
     }
 }

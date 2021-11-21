@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccess.Concrete.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class FirstModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,15 +49,14 @@ namespace DataAccess.Concrete.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Car",
+                name: "Location",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BrandId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BrandId1 = table.Column<int>(type: "int", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CarId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -67,13 +66,7 @@ namespace DataAccess.Concrete.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Car", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Car_Brand_BrandId1",
-                        column: x => x.BrandId1,
-                        principalTable: "Brand",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Location", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,6 +98,40 @@ namespace DataAccess.Concrete.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Car",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BrandId = table.Column<int>(type: "int", nullable: false),
+                    LocationId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Car", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Car_Brand_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brand",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Car_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Invoice",
                 columns: table => new
                 {
@@ -113,7 +140,7 @@ namespace DataAccess.Concrete.Migrations
                     RentMoney = table.Column<float>(type: "real", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PlateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CarId = table.Column<int>(type: "int", nullable: false),
+                    RentId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -125,36 +152,9 @@ namespace DataAccess.Concrete.Migrations
                 {
                     table.PrimaryKey("PK_Invoice", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Invoice_Car_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Car",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Location",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Location", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Location_Car_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Car",
+                        name: "FK_Invoice_Rent_RentId",
+                        column: x => x.RentId,
+                        principalTable: "Rent",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -184,19 +184,19 @@ namespace DataAccess.Concrete.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Car_BrandId1",
+                name: "IX_Car_BrandId",
                 table: "Car",
-                column: "BrandId1");
+                column: "BrandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Invoice_CarId",
+                name: "IX_Car_LocationId",
+                table: "Car",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Invoice_RentId",
                 table: "Invoice",
-                column: "CarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Location_CarId",
-                table: "Location",
-                column: "CarId",
+                column: "RentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -222,9 +222,6 @@ namespace DataAccess.Concrete.Migrations
                 name: "Invoice");
 
             migrationBuilder.DropTable(
-                name: "Location");
-
-            migrationBuilder.DropTable(
                 name: "RentCar");
 
             migrationBuilder.DropTable(
@@ -235,6 +232,9 @@ namespace DataAccess.Concrete.Migrations
 
             migrationBuilder.DropTable(
                 name: "Brand");
+
+            migrationBuilder.DropTable(
+                name: "Location");
 
             migrationBuilder.DropTable(
                 name: "Customer");

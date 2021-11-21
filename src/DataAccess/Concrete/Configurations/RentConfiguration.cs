@@ -15,6 +15,22 @@ namespace DataAccess.Concrete.Configurations
         {
             builder.ToTable("Rent");
             builder.HasKey(x => x.Id);
+
+
+            var dateTime = new DateTime(2021, 1, 1);
+
+            builder.HasData(new Rent
+            {
+                Id = 1,
+                PlateNo = "06 CJF 117",
+                DeliveryDay = dateTime,
+                CustomerId = 1,
+                RentBeginDate = dateTime,
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            }); ;
         }
     }
 }

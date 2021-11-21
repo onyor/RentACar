@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Concrete.Migrations
 {
     [DbContext(typeof(RentACarContext))]
-    [Migration("20211022144018_AddRentToInvoice")]
-    partial class AddRentToInvoice
+    [Migration("20211121083922_FirstModel")]
+    partial class FirstModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,10 +61,7 @@ namespace DataAccess.Concrete.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BrandId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("BrandId1")
+                    b.Property<int>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<string>("Color")
@@ -96,7 +93,7 @@ namespace DataAccess.Concrete.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandId1");
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("LocationId");
 
@@ -295,7 +292,9 @@ namespace DataAccess.Concrete.Migrations
                 {
                     b.HasOne("Entity.Concrete.Brand", "Brand")
                         .WithMany("Cars")
-                        .HasForeignKey("BrandId1");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Entity.Concrete.Location", null)
                         .WithMany("Cars")
