@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
@@ -14,6 +10,48 @@ namespace DataAccess.Concrete.Configurations
         public void Configure(EntityTypeBuilder<Brand> builder)
         {
             builder.ToTable("Brand");
+
+            var dateTime = new DateTime(2021, 1, 1);
+
+            builder.HasData(new Brand
+            {
+                Id = 1,
+                Name = "Mercedes",
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
+
+            builder.HasData(new Brand
+            {
+                Id = 2,
+                Name = "BMW",
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
+
+            builder.HasData(new Brand
+            {
+                Id = 3,
+                Name = "TOGG",
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
+
+            builder.HasData(new Brand
+            {
+                Id = 4,
+                Name = "Porsche",
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
         }
     }
 }

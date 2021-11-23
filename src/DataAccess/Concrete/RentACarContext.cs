@@ -1,13 +1,6 @@
 ﻿using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete
 {
@@ -22,11 +15,6 @@ namespace DataAccess.Concrete
 
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-        //}
-
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
@@ -36,7 +24,7 @@ namespace DataAccess.Concrete
         public DbSet<RentCar> RentCars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
-        { 
+        {
             builder.Entity<RentCar>()
                 .HasOne(e => e.Rent)
                 .WithMany(e => e.RentCars)
@@ -48,7 +36,7 @@ namespace DataAccess.Concrete
                 .HasForeignKey(e => e.CarId);
 
 
-            builder.Entity<RentCar>().HasKey(x => new { x.RentId, x.CarId});
+            builder.Entity<RentCar>().HasKey(x => new { x.RentId, x.CarId });
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);

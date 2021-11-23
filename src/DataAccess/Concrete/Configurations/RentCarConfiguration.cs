@@ -23,6 +23,24 @@ namespace DataAccess.Concrete.Configurations
                 CarId = 1,
                 RentId = 1
             });
+
+            builder.HasData(new RentCar
+            {
+                CarId = 2,
+                RentId = 2
+            });
+
+            builder.HasData(new RentCar
+            {
+                CarId = 3,
+                RentId = 3
+            });
+
+            builder.HasData(new RentCar
+            {
+                CarId = 2,
+                RentId = 3
+            });
         }
     }
 }

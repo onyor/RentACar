@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
@@ -50,6 +50,44 @@ namespace DataAccess.Concrete.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brand");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Mercedes"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "TOGG"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Porsche"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.Car", b =>
@@ -68,7 +106,7 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
@@ -96,6 +134,41 @@ namespace DataAccess.Concrete.Migrations
                     b.HasIndex("LocationId");
 
                     b.ToTable("Car");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrandId = 1,
+                            Color = "Kırmızı",
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            PlateNo = "06 CJF 117"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrandId = 2,
+                            Color = "Siyah",
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            PlateNo = "06 ABC 123"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrandId = 3,
+                            Color = "Yeşil",
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            PlateNo = "08 LAZ 999"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.Customer", b =>
@@ -111,7 +184,7 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
@@ -138,6 +211,32 @@ namespace DataAccess.Concrete.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Ergazi Mah",
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Onur",
+                            Phone = "5845844595",
+                            Surname = "Yıldız"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Bent Deresi",
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Muhammed",
+                            Phone = "5485648546",
+                            Surname = "Yazıcı"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.Invoice", b =>
@@ -150,10 +249,10 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -161,9 +260,6 @@ namespace DataAccess.Concrete.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("PlateNo")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RentId")
                         .HasColumnType("int");
@@ -183,6 +279,41 @@ namespace DataAccess.Concrete.Migrations
                         .IsUnique();
 
                     b.ToTable("Invoice");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Date = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            RentId = 1,
+                            RentMoney = 50f
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Date = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            RentId = 2,
+                            RentMoney = 150f
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Date = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            RentId = 3,
+                            RentMoney = 250f
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.Location", b =>
@@ -201,7 +332,7 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
@@ -222,6 +353,30 @@ namespace DataAccess.Concrete.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Location");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Atlantis AVM",
+                            CarId = 1,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Phone = "5545874565"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Ostim OSB",
+                            CarId = 2,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            IsActive = true,
+                            IsDeleted = false,
+                            Phone = "5487985465"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.Rent", b =>
@@ -234,13 +389,13 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CreatedBy")
+                    b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DeliveryDay")
+                    b.Property<DateTime?>("DeliveryDay")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -249,10 +404,7 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PlateNo")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RentBeginDate")
+                    b.Property<DateTime?>("RentBeginDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -266,6 +418,41 @@ namespace DataAccess.Concrete.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Rent");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CustomerId = 1,
+                            DeliveryDay = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            RentBeginDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CustomerId = 1,
+                            DeliveryDay = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            RentBeginDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CustomerId = 2,
+                            DeliveryDay = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsDeleted = false,
+                            RentBeginDate = new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.RentCar", b =>
@@ -284,6 +471,28 @@ namespace DataAccess.Concrete.Migrations
                         .IsUnique();
 
                     b.ToTable("RentCar");
+
+                    b.HasData(
+                        new
+                        {
+                            RentId = 1,
+                            CarId = 1
+                        },
+                        new
+                        {
+                            RentId = 2,
+                            CarId = 2
+                        },
+                        new
+                        {
+                            RentId = 3,
+                            CarId = 3
+                        },
+                        new
+                        {
+                            RentId = 3,
+                            CarId = 2
+                        });
                 });
 
             modelBuilder.Entity("Entity.Concrete.Car", b =>
@@ -316,9 +525,7 @@ namespace DataAccess.Concrete.Migrations
                 {
                     b.HasOne("Entity.Concrete.Customer", null)
                         .WithMany("Rents")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("Entity.Concrete.RentCar", b =>

@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
@@ -15,6 +11,32 @@ namespace DataAccess.Concrete.Configurations
         {
             builder.ToTable("Location");
             builder.HasKey(x => x.Id);
+
+            var dateTime = new DateTime(2021, 1, 1);
+
+            builder.HasData(new Location
+            {
+                Id = 1,
+                Phone = "5545874565",
+                Address = "Atlantis AVM",
+                CarId = 1,
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
+
+            builder.HasData(new Location
+            {
+                Id = 2,
+                Phone = "5487985465",
+                Address = "Ostim OSB",
+                CarId = 2,
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
         }
     }
 }

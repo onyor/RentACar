@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.Configurations
 {
@@ -16,13 +12,11 @@ namespace DataAccess.Concrete.Configurations
             builder.ToTable("Rent");
             builder.HasKey(x => x.Id);
 
-
             var dateTime = new DateTime(2021, 1, 1);
 
             builder.HasData(new Rent
             {
                 Id = 1,
-                PlateNo = "06 CJF 117",
                 DeliveryDay = dateTime,
                 CustomerId = 1,
                 RentBeginDate = dateTime,
@@ -30,7 +24,31 @@ namespace DataAccess.Concrete.Configurations
                 CreatedBy = Guid.Empty,
                 IsActive = true,
                 IsDeleted = false
-            }); ;
+            });
+
+            builder.HasData(new Rent
+            {
+                Id = 2,
+                DeliveryDay = dateTime,
+                CustomerId = 1,
+                RentBeginDate = dateTime,
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
+
+            builder.HasData(new Rent
+            {
+                Id = 3,
+                DeliveryDay = dateTime,
+                CustomerId = 2,
+                RentBeginDate = dateTime,
+                CreatedAt = dateTime,
+                CreatedBy = Guid.Empty,
+                IsActive = true,
+                IsDeleted = false
+            });
         }
     }
 }

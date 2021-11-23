@@ -15,7 +15,7 @@ namespace DataAccess.Concrete.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -37,7 +37,7 @@ namespace DataAccess.Concrete.Migrations
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -58,7 +58,7 @@ namespace DataAccess.Concrete.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -75,12 +75,11 @@ namespace DataAccess.Concrete.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlateNo = table.Column<int>(type: "int", nullable: false),
-                    DeliveryDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    RentBeginDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeliveryDay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    RentBeginDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -94,7 +93,7 @@ namespace DataAccess.Concrete.Migrations
                         column: x => x.CustomerId,
                         principalTable: "Customer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,7 +107,7 @@ namespace DataAccess.Concrete.Migrations
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -138,11 +137,10 @@ namespace DataAccess.Concrete.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RentMoney = table.Column<float>(type: "real", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PlateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RentId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -181,6 +179,76 @@ namespace DataAccess.Concrete.Migrations
                         principalTable: "Rent",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Brand",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "Name", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Mercedes", null, null },
+                    { 2, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "BMW", null, null },
+                    { 3, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "TOGG", null, null },
+                    { 4, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Porsche", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customer",
+                columns: new[] { "Id", "Address", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "Name", "Phone", "Surname", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "Ergazi Mah", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Onur", "5845844595", "Yıldız", null, null },
+                    { 2, "Bent Deresi", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "Muhammed", "5485648546", "Yazıcı", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Location",
+                columns: new[] { "Id", "Address", "CarId", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "Phone", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, "Atlantis AVM", 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "5545874565", null, null },
+                    { 2, "Ostim OSB", 2, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, "5487985465", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Car",
+                columns: new[] { "Id", "BrandId", "Color", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "LocationId", "PlateNo", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, 1, "Kırmızı", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "06 CJF 117", null, null },
+                    { 2, 2, "Siyah", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "06 ABC 123", null, null },
+                    { 3, 3, "Yeşil", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "08 LAZ 999", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rent",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "CustomerId", "DeliveryDay", "IsActive", "IsDeleted", "RentBeginDate", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, false, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null },
+                    { 2, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, false, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null },
+                    { 3, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), 2, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, false, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Invoice",
+                columns: new[] { "Id", "CreatedAt", "CreatedBy", "Date", "IsActive", "IsDeleted", "RentId", "RentMoney", "UpdatedAt", "UpdatedBy" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, false, 1, 50f, null, null },
+                    { 2, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, false, 2, 150f, null, null },
+                    { 3, new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, false, 3, 250f, null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RentCar",
+                columns: new[] { "CarId", "RentId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 2, 3 }
                 });
 
             migrationBuilder.CreateIndex(
