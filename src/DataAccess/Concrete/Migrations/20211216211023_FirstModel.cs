@@ -105,6 +105,7 @@ namespace DataAccess.Concrete.Migrations
                     PlateNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BrandId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
                     LocationId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -212,12 +213,12 @@ namespace DataAccess.Concrete.Migrations
 
             migrationBuilder.InsertData(
                 table: "Car",
-                columns: new[] { "Id", "BrandId", "Color", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "LocationId", "PlateNo", "UpdatedAt", "UpdatedBy" },
+                columns: new[] { "Id", "BrandId", "Color", "CreatedAt", "CreatedBy", "IsActive", "IsDeleted", "LocationId", "PlateNo", "Price", "UpdatedAt", "UpdatedBy" },
                 values: new object[,]
                 {
-                    { 1, 1, "Kırmızı", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "06 CJF 117", null, null },
-                    { 2, 2, "Siyah", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "06 ABC 123", null, null },
-                    { 3, 3, "Yeşil", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "08 LAZ 999", null, null }
+                    { 1, 1, "Kırmızı", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "06 CJF 117", 0, null, null },
+                    { 2, 2, "Siyah", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "06 ABC 123", 0, null, null },
+                    { 3, 3, "Yeşil", new DateTime(2021, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("00000000-0000-0000-0000-000000000000"), true, false, null, "08 LAZ 999", 0, null, null }
                 });
 
             migrationBuilder.InsertData(

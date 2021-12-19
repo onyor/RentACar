@@ -1,19 +1,34 @@
 ﻿using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Reflection;
 
 namespace DataAccess.Concrete
 {
-    public class RentACarContext : DbContext
+    public class RentACarDBContext : DbContext
     {
-        public RentACarContext(DbContextOptions<RentACarContext> options)
+        public RentACarDBContext(DbContextOptions<RentACarDBContext> options)
           : base(options)
         { }
 
-        public RentACarContext()
-        {
+        string _connectionString;
 
+        public RentACarDBContext(string connectionString) => _connectionString = connectionString;
+
+        public RentACarDBContext()
+        {
+            IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build();
+            _connectionString = config.GetConnectionString("DefaultConnection");
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (_connectionString != null)
+                optionsBuilder.UseSqlServer(_connectionString);
+            if (InsideLINQPad) optionsBuilder.EnableSensitiveDataLogging(true);
+        }
+        internal bool InsideLINQPad => AppDomain.CurrentDomain.FriendlyName.StartsWith("LINQPad");
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<Customer> Customers { get; set; }

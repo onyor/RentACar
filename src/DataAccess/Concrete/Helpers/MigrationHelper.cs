@@ -9,7 +9,7 @@ namespace DataAccess.Concrete.Helpers
 {
     public static class MigrationHelper
     {
-        public static void MigrateRentACarContext(DbContext context)
+        public static void MigrateRentACarDBContext(DbContext context)
         {
             context.Database.Migrate();
             context.SaveChanges();

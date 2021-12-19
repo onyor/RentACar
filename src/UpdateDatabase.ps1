@@ -1,1 +1,1 @@
-dotnet ef database update -c RentACarContext -p DataAccess -s WebAPI
+dotnet ef database update -c RentACarDBContext -p DataAccess -s WebAPI

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Concrete.Migrations
 {
-    [DbContext(typeof(RentACarContext))]
-    [Migration("20211123215916_FirstModel")]
+    [DbContext(typeof(RentACarDBContext))]
+    [Migration("20211216211023_FirstModel")]
     partial class FirstModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,6 +123,9 @@ namespace DataAccess.Concrete.Migrations
                     b.Property<string>("PlateNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -147,7 +150,8 @@ namespace DataAccess.Concrete.Migrations
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsActive = true,
                             IsDeleted = false,
-                            PlateNo = "06 CJF 117"
+                            PlateNo = "06 CJF 117",
+                            Price = 0
                         },
                         new
                         {
@@ -158,7 +162,8 @@ namespace DataAccess.Concrete.Migrations
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsActive = true,
                             IsDeleted = false,
-                            PlateNo = "06 ABC 123"
+                            PlateNo = "06 ABC 123",
+                            Price = 0
                         },
                         new
                         {
@@ -169,7 +174,8 @@ namespace DataAccess.Concrete.Migrations
                             CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsActive = true,
                             IsDeleted = false,
-                            PlateNo = "08 LAZ 999"
+                            PlateNo = "08 LAZ 999",
+                            Price = 0
                         });
                 });
 

@@ -1,6 +1,7 @@
 using DataAccess.Concrete;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -20,7 +21,7 @@ namespace WebAPI
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<RentACarContext>();
+                    var context = services.GetRequiredService<RentACarDBContext>();
 
                     if (context.Database.GetPendingMigrations().Any())
                     {

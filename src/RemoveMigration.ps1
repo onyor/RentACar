@@ -1,8 +1,8 @@
 Write-Host ""
-$Context = Read-Host "Enter DbContext Name [Default: 'RentACarContext']"
+$Context = Read-Host "Enter DbContext Name [Default: 'RentACarDBContext']"
 Write-Host ""
 if ($Context.Trim() -eq "") {
-    $Context = "RentACarContext"
+    $Context = "RentACarDBContext"
 }
 Write-Host ""
 Write-Host "Removing last Migration..."

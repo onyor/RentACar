@@ -1,6 +1,7 @@
 ﻿using Buisness.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,10 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("allCar")]
-        public IActionResult GetAll()
+        public List<Car> GetAll()
         {
-            return (IActionResult)_carManager.GetAll();
+            var result = _carManager.GetAll();
+            return result.Data;
         }
     }
 }

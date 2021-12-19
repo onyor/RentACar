@@ -10,9 +10,9 @@ if ($Name.Trim() -eq "") {
 
 Write-Host ""
 
-$Context = Read-Host "Enter DbContext Name [Default: 'RentACarContext']"
+$Context = Read-Host "Enter DbContext Name [Default: 'RentACarDBContext']"
 if ($Context.Trim() -eq "") {
-    $Context = "RentACarContext"
+    $Context = "RentACarDBContext"
 }
 
 Write-Host ""
