@@ -1,4 +1,5 @@
-﻿using Buisness.Concrete;
+﻿using Buisness.Abstract;
+using Buisness.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entity.Concrete;
@@ -14,20 +15,45 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarsController : Controller
     {
-        CarManager _carManager;
-        ICarDal _efCarDal;
-        public CarsController()
+        private ICarService _carService;
+        public CarsController(ICarService carService)
         {
-            _efCarDal = new EfCarDal();
-            _carManager = new CarManager(_efCarDal);
+            _carService = carService;
         }
 
 
-        [HttpGet("allCar")]
-        public List<Car> GetAll()
+        [HttpGet("getAllCar")]
+        public IActionResult GetAll()
         {
-            var result = _carManager.GetAll();
-            return result.Data;
+            var result = _carService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getById/{id}")]
+        public IActionResult GetById(int id)
+        {
+            var result = _carService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+        [HttpPost("addCar")]
+        public IActionResult AddCar(Car car)
+        {
+            var result = _carService.Add(car);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
