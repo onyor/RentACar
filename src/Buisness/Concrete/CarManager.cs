@@ -1,5 +1,5 @@
-﻿using Buisness.Abstract;
-using Buisness.ValidationRules.FluentValidation;
+﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -10,7 +10,7 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 
-namespace Buisness.Concrete
+namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
@@ -29,12 +29,18 @@ namespace Buisness.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId));
         }
 
+
+
+
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
             return new SuccessResult();
         }
+
+
+
 
         public IResult Delete(int id)
         {

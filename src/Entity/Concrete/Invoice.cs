@@ -7,6 +7,10 @@ namespace Entity.Concrete
         public float RentMoney { get; set; }
         public DateTime? Date { get; set; }
         public int RentId { get; set; }
+
+
+
+
         public Rent Rent { get; set; }
     }
 }

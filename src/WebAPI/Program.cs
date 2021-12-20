@@ -1,6 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Buisness.DependencyResolvers.Autofac;
+using Business.DependencyResolvers.Autofac;
 using DataAccess.Concrete;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

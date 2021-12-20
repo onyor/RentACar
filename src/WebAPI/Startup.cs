@@ -1,8 +1,4 @@
-using Buisness.Abstract;
-using Buisness.Concrete;
-using DataAccess.Abstract;
 using DataAccess.Concrete;
-using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace WebAPI
 {
@@ -38,7 +33,7 @@ namespace WebAPI
 
             services.AddDbContext<RentACarDBContext>(options => options.UseSqlServer(ConnectionString, x => x.MigrationsAssembly("DataAccess")));
 
-           
+
             services.AddSwaggerGen();
         }
 

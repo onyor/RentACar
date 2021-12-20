@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
-using Buisness.Abstract;
-using Buisness.Concrete;
+using Business.Abstract;
+using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using DataAccess.Abstract;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buisness.DependencyResolvers.Autofac
+namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBusinessModule :Module
     {

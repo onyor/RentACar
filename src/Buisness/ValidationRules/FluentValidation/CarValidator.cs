@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Buisness.ValidationRules.FluentValidation
+namespace Business.ValidationRules.FluentValidation
 {
     public class CarValidator :AbstractValidator<Car>
     {

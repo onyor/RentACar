@@ -10,6 +10,8 @@ namespace Entity.Concrete
         public DateTime? RentBeginDate { get; set; }
 
         // NAV properties
+
+
         public Invoice Invoice { get; set; }
         public List<RentCar> RentCars { get; set; }
     }
