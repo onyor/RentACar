@@ -1,13 +1,15 @@
 ﻿using Core.Entities;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Entity.Concrete
+namespace Entities.Concrete
 {
     public abstract class BaseEntity : IEntity
     {
-        // This can be modified to BaseEntity<TId> to support multiple key types (e.g. Guid)
         [Column(Order = 0)]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Column(Order = 94)]

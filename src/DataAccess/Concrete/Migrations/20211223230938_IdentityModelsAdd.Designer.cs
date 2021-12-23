@@ -4,14 +4,16 @@ using DataAccess.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Concrete.Migrations
 {
     [DbContext(typeof(RentACarDBContext))]
-    partial class RentACarDBContextModelSnapshot : ModelSnapshot
+    [Migration("20211223230938_IdentityModelsAdd")]
+    partial class IdentityModelsAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

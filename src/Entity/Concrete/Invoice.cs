@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 
 namespace Entity.Concrete
 {
@@ -10,7 +11,7 @@ namespace Entity.Concrete
 
 
 
-
+        // NAV properties
         public Rent Rent { get; set; }
     }
 }

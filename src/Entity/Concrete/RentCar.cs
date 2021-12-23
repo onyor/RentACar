@@ -7,6 +7,8 @@ namespace Entity.Concrete
         public int CarId { get; set; }
         public int RentId { get; set; }
 
+
+        // NAV properties
         public Car Car { get; set; }
         public Rent Rent { get; set; }
     }

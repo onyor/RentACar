@@ -1,4 +1,5 @@
-﻿using Entity.Concrete;
+﻿using Entities.Concrete.Identity;
+using Entity.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -37,6 +38,9 @@ namespace DataAccess.Concrete
         public DbSet<Rent> Rents { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<RentCar> RentCars { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
