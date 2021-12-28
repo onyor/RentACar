@@ -2,7 +2,6 @@
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete.Identity;
-using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -10,10 +9,12 @@ namespace Business.Concrete
     public class UserManager : IUserService
     {
         IUserDal _userDal;
+
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
         }
+
         public IResult Add(User user)
         {
             if (user != null)
@@ -30,7 +31,7 @@ namespace Business.Concrete
         {
             if (email != null)
             {
-                _userDal.Get(u=>u.Email==email);
+                _userDal.Get(u => u.Email == email);
 
                 return new SuccessDataResult<User>();
             }

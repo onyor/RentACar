@@ -1,11 +1,8 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -13,7 +10,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<OperationClaim> GetClaims(User user)
         {
-            using (var context=new RentACarDBContext())
+            using (var context = new RentACarDBContext())
             {
                 var result = from operationClaim in context.OperationClaims
                              join userOperationClaim in context.UserOperationClaims
