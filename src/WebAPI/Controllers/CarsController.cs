@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarsController : Controller
     {
-        private ICarService _carService;
+        private readonly ICarService _carService;
         public CarsController(ICarService carService)
         {
             _carService = carService;
