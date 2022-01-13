@@ -1,12 +1,15 @@
 ﻿using Business.Abstract;
 using Business.Business.BusinessAspect.Autofac;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Business.Concrete
 {
@@ -28,8 +31,16 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
+
+            IResult result = BusinessRules.Run(CheckIfCarPlateExists(car.PlateNo));
+
+            if (result != null)
+            {
+                return result;
+            }
+
             _carDal.Add(car);
-            return new SuccessResult();
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(int id)
@@ -52,6 +63,17 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
             _carDal.Update(car);
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfCarPlateExists(string plateNo)
+        {
+            // Buisness codes
+            var result = _carDal.GetAll(p => p.PlateNo == plateNo).Any();
+            if (result)
+            {
+                return new ErrorResult(Messages.ProductNameAlreadyExists);
+            }
             return new SuccessResult();
         }
     }
