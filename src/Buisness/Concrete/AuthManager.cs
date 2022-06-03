@@ -55,11 +55,12 @@ namespace Business.Concrete
 
         public IResult UserExists(string email)
         {
-            if (_userService.GetByMail(email) != null)
+            var result = _userService.GetByMail(email);
+            if (result != null)
             {
-                return new ErrorResult(Messages.UserAlreadyExists);
+                return new SuccessResult();
             }
-            return new SuccessResult();
+            return new ErrorResult(Messages.UserAlreadyExists);
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)

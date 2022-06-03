@@ -11,8 +11,8 @@ namespace Business.Business.BusinessAspect.Autofac
 {
     public class SecuredOperation : MethodInterception
     {
-        private string[] _roles;
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly string[] _roles;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public SecuredOperation(params string[] roles)
         {
             _roles = roles;
