@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.Interface;
+﻿using Core.DataAccess.Abstract;
 using Entities.Concrete.Identity;
 using System.Collections.Generic;
 
